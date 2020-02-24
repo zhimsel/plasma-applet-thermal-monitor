@@ -348,7 +348,7 @@ Item {
         columns: 2
         
         Label {
-            text: i18n('Plasmoid version: ') + '1.2.8'
+            text: i18n('Plasmoid version: ') + '1.3.0'
             Layout.alignment: Qt.AlignRight
             Layout.columnSpan: 2
         }

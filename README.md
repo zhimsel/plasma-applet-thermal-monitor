@@ -2,10 +2,14 @@ Thermal Monitor
 ---------------
 Plasma 5 applet for monitoring CPU, GPU and other available temperature sensors.
 
+### Requirement for Fedora
+
+sudo dnf install kf5-plasma-devel extra-cmake-modules -y
+
 ### INSTALLATION
 
 ```sh
-$ git clone --depth=1 https://github.com/kotelnik/plasma-applet-thermal-monitor
+$ git clone --depth=1 https://github.com/agurenko/plasma-applet-thermal-monitor
 $ cd plasma-applet-thermal-monitor/
 $ mkdir build
 $ cd build

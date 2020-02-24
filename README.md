@@ -4,7 +4,7 @@ Plasma 5 applet for monitoring CPU, GPU and other available temperature sensors.
 
 ### Requirement for Fedora
 
-sudo dnf install kf5-plasma-devel extra-cmake-modules -y
+```$ sudo dnf install kf5-plasma-devel extra-cmake-modules -y```
 
 ### INSTALLATION
 

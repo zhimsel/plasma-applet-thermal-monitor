@@ -12,7 +12,7 @@ I have no affiliation with this project, but I'm tired of manually patching this
 ### INSTALLATION
 
 ```sh
-$ git clone --depth=1 https://github.com/agurenko/plasma-applet-thermal-monitor
+$ git clone --depth=1 https://gitlab.com/agurenko/plasma-applet-thermal-monitor.git
 $ cd plasma-applet-thermal-monitor/
 $ mkdir build
 $ cd build

@@ -9,6 +9,10 @@ I have no affiliation with this project, but I'm tired of manually patching this
 
 ```$ sudo dnf install kf5-plasma-devel extra-cmake-modules -y```
 
+### Requirement for Arch
+
+```sudo pacman -S kde-development-environment-meta```
+
 ### INSTALLATION
 
 ```sh

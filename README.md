@@ -2,6 +2,10 @@ Thermal Monitor
 ---------------
 Plasma 5 applet for monitoring CPU, GPU and other available temperature sensors.
 
+## Active Fork
+
+Active development is happening at https://gitlab.com/agurenko/plasma-applet-thermal-monitor
+
 ### INSTALLATION
 
 ```sh

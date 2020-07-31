@@ -529,28 +529,31 @@ Item {
 
         connectedSources: [ ModelUtils.UDISKS_DEVICES_CMD ]
 
+        property bool prepared: false
+
         onNewData: {
-            connectedSources.length = 0
+            if (!prepared)
+            {
+                if (data['exit code'] > 0) {
+                    print('New data incomming. Source: ' + sourceName + ', ERROR: ' + data.stderr);
+                    return
+                }
 
-            if (data['exit code'] > 0) {
-                print('New data incomming. Source: ' + sourceName + ', ERROR: ' + data.stderr);
-                return
-            }
+                print('New data incomming. Source: ' + sourceName + ', data: ' + data.stdout);
 
-            print('New data incomming. Source: ' + sourceName + ', data: ' + data.stdout);
-
-            var pathsToCheck = ModelUtils.parseUdisksPaths(data.stdout)
-            pathsToCheck.forEach(function (pathObj) {
-                var cmd = ModelUtils.UDISKS_VIRTUAL_PATH_PREFIX + pathObj.name
-                comboboxModel.append({
-                    text: cmd,
-                    val: cmd
+                var pathsToCheck = ModelUtils.parseUdisksPaths(data.stdout)
+                pathsToCheck.forEach(function (pathObj) {
+                    var cmd = ModelUtils.UDISKS_VIRTUAL_PATH_PREFIX + pathObj.name
+                    comboboxModel.append({
+                        text: cmd,
+                        val: cmd
+                    })
                 })
-            })
 
+                prepared = true
+
+            }
         }
-
-        interval: 500
     }
 
     PlasmaCore.DataSource {
@@ -559,29 +562,31 @@ Item {
 
         connectedSources: ['sudo nvme list -o json | jq -r ".Devices | map(.DevicePath)"']
 
+        property bool prepared: false
+
         onNewData: {
-            connectedSources.length = 0
+            if (!prepared)
+            {
+                if (data['exit code'] > 0) {
+                    print('New data incomming. Source: ' + sourceName + ', ERROR: ' + data.stderr);
+                    return
+                }
 
-            if (data['exit code'] > 0) {
-                print('New data incomming. Source: ' + sourceName + ', ERROR: ' + data.stderr);
-                return
-            }
+                print('New data incomming. Source: ' + sourceName + ', data: ' + data.stdout);
 
-            print('New data incomming. Source: ' + sourceName + ', data: ' + data.stdout);
-
-            var pathsToCheck = ModelUtils.parseNvmePaths(data.stdout)
-            pathsToCheck.forEach(function (pathObj) {
-                var cmd = ModelUtils.NVME_VIRTUAL_PATH_PREFIX + pathObj.name
-                comboboxModel.append({
-                    text: cmd,
-                    val: cmd
+                var pathsToCheck = ModelUtils.parseNvmePaths(data.stdout)
+                pathsToCheck.forEach(function (pathObj) {
+                    var cmd = ModelUtils.NVME_VIRTUAL_PATH_PREFIX + pathObj.name
+                    comboboxModel.append({
+                        text: cmd,
+                        val: cmd
+                    })
                 })
-            })
 
+                prepared = true
+
+            }
         }
-
-        interval: 500
-
     }
 
     PlasmaCore.DataSource {
@@ -593,22 +598,21 @@ Item {
         property bool prepared: false
 
         onNewData: {
-            nvidiaDS.connectedSources.length = 0
+            if (!prepared)
+            {
+                if (data['exit code'] > 0) {
+                    prepared = true
+                    return
+                }
 
-            if (data['exit code'] > 0) {
+                comboboxModel.append({
+                    text: 'nvidia-smi',
+                    val: 'nvidia-smi'
+                })
+
                 prepared = true
-                return
             }
-
-            comboboxModel.append({
-                text: 'nvidia-smi',
-                val: 'nvidia-smi'
-            })
-
-            prepared = true
         }
-
-        interval: 500
     }
 
     PlasmaCore.DataSource {
@@ -620,22 +624,21 @@ Item {
         property bool prepared: false
 
         onNewData: {
-            atiDS.connectedSources.length = 0
+            if (!prepared)
+            {
+                if (data['exit code'] > 0) {
+                    prepared = true
+                    return
+                }
 
-            if (data['exit code'] > 0) {
+                comboboxModel.append({
+                    text: 'aticonfig',
+                    val: 'aticonfig'
+                })
+
                 prepared = true
-                return
             }
-
-            comboboxModel.append({
-                text: 'aticonfig',
-                val: 'aticonfig'
-            })
-
-            prepared = true
         }
-
-        interval: 500
     }
 
 }
